@@ -3,7 +3,7 @@ class Vector:
     def __init__(self, lst):
         self._values = list(lst)
 
-    @classmethod
+    @classmethod # 类方法 相对应 java 静态方法
     def zero(cls, dim):
         """返回一个dim维的零向量"""
         return cls([0] * dim)

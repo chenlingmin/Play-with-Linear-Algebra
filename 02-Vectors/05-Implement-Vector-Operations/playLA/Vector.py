@@ -9,6 +9,7 @@ class Vector:
             "Error in adding. Length of vectors must be same."
 
         # return Vector([a + b for a, b in zip(self._values, another._values)])
+        # 使用迭代器 需要重写 __iter__
         return Vector([a + b for a, b in zip(self, another)])
 
     def __sub__(self, another):
