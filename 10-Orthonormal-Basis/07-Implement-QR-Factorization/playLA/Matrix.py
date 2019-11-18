@@ -1,10 +1,12 @@
+import types
 from .Vector import Vector
-
 
 class Matrix:
 
     def __init__(self, list2d):
-        if isinstance(list2d[0], list):
+        if isinstance(list2d, types.GeneratorType):
+            self._values = [row[:] for row in list2d]
+        elif isinstance(list2d[0], list):
             self._values = [row[:] for row in list2d]
         elif isinstance(list2d[0], Vector):
             self._values = [row.underlying_list() for row in list2d]
@@ -34,8 +36,9 @@ class Matrix:
             "Error in adding. Shape of matrix must be same."
 
         # return Matrix([a + b for a, b in zip(self.row_vector(i), other.row_vector(i))] for i in range(self.row_num()))
-        return Matrix([self.row_vector(i) + other.row_vector(i)]
-                      for i in range(self.row_num()))
+        b = [self.row_vector(i) + other.row_vector(i)
+                      for i in range(self.row_num())]
+        return Matrix(b)
 
     def __sub__(self, other):
         """返回两个矩阵的减法结果"""
